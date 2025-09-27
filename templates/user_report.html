@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}User Report - Word Guess Game{% endblock %}
+{% block content %}
+<div class="mt-5">
+    <h2 class="mb-4 text-center">User Report</h2>
+    <form method="POST" class="mb-4 d-flex justify-content-center align-items-end gap-2">
+        <div>
+            <label for="user_id" class="form-label">Select User:</label>
+            <select name="user_id" id="user_id" class="form-select">
+                <option value="">-- Select --</option>
+                {% for user in users %}
+                    <option value="{{ user.id }}" {% if selected_user_id == user.id %}selected{% endif %}>{{ user.username }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Show Report</button>
+    </form>
+    {% if report_data %}
+    <div class="card mx-auto" style="max-width: 500px;">
+        <div class="card-body">
+            <h5 class="card-title">Report for {{ report_data.username }}</h5>
+            <table class="table table-bordered mt-3">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Words Tried</th>
+                        <th>Correct Guesses</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for stat in report_data.stats %}
+                    <tr>
+                        <td>{{ stat.date }}</td>
+                        <td>{{ stat.tried }}</td>
+                        <td>{{ stat.correct }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

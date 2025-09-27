@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Admin Dashboard - Word Guess Game{% endblock %}
+{% block content %}
+<div class="mt-5 text-center">
+    <h2 class="mb-4">Admin Dashboard</h2>
+    <div class="d-grid gap-3 col-6 mx-auto">
+        <a href="{{ url_for('daily_report') }}" class="btn btn-lg btn-primary">Daily Report</a>
+        <a href="{{ url_for('user_report') }}" class="btn btn-lg btn-success">User Report</a>
+    </div>
+</div>
+{% endblock %}

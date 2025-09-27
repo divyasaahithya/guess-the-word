@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Play - Word Guess Game{% endblock %}
+{% block content %}
+<div class="text-center mt-4">
+    <h2 class="mb-4">Guess the Word</h2>
+    <div class="game-board mb-4">
+        {% for g in guesses %}
+            <div class="row justify-content-center">
+                {% for i in range(5) %}
+                    <div class="cell {{ g[1][i] }}">{{ g[0][i] }}</div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+        {% for _ in range(5 - guesses|length) %}
+            <div class="row justify-content-center">
+                {% for _ in range(5) %}
+                    <div class="cell">&nbsp;</div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+            {% if not game_over %}
+            <form method="POST" action="{{ url_for('make_guess') }}" class="mb-3">
+                    <div class="input-group mb-2" style="max-width: 300px; margin: 0 auto;">
+                            <input type="text" name="guess" maxlength="5" class="form-control text-uppercase" placeholder="Enter 5-letter word" required autofocus>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+            </form>
+            {% else %}
+            <a href="{{ url_for('start_game') }}" class="btn btn-success">Play Again</a>
+            {% endif %}
+    </div>
+{% endblock %}

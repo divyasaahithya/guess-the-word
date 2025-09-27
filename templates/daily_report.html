@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Daily Report - Word Guess Game{% endblock %}
+{% block content %}
+<div class="mt-5">
+    <h2 class="mb-4 text-center">Daily Report</h2>
+    <form method="POST" class="mb-4 d-flex justify-content-center align-items-end gap-2">
+        <div>
+            <label for="report_date" class="form-label">Select Date:</label>
+            <input type="date" id="report_date" name="report_date" class="form-control" value="{{ selected_date }}">
+        </div>
+        <button type="submit" class="btn btn-primary">Show Report</button>
+    </form>
+    {% if report_data %}
+    <div class="card mx-auto" style="max-width: 400px;">
+        <div class="card-body">
+            <h5 class="card-title">Report for {{ report_data.date.strftime('%Y-%m-%d') }}</h5>
+            <p class="card-text">Number of users played: <strong>{{ report_data.users_played }}</strong></p>
+            <p class="card-text">Number of correct guesses: <strong>{{ report_data.correct_guesses }}</strong></p>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
